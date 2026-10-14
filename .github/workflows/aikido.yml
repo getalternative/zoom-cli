@@ -1,0 +1,20 @@
+name: "Aikido Security Analysis"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  # The gate posts and updates one comment on the pull request.
+  pull-requests: write
+
+jobs:
+  Aikido:
+    uses: getalternative/alt-github-workflows/.github/workflows/aikido.yml@main
+    secrets: inherit
